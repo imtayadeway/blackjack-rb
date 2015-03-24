@@ -16,7 +16,7 @@ module Blackjack
 
     def ==(other)
       object_id == other.object_id ||
-        other.class == self.class && [rank, suit] == [other.rank, other.suit]
+        self.class == other.class && [rank, suit] == [other.rank, other.suit]
     end
 
     def <=>(other)
