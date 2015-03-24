@@ -2,7 +2,20 @@ require "spec_helper"
 
 describe Blackjack::Hand do
   describe "#bust?" do
-    #
+    it "returns true if score > 21" do
+      hand = new_hand_with_cards(:jack, :queen, 2)
+      expect(hand).to be_bust
+    end
+
+    it "returns false if score == 21" do
+      hand = new_hand_with_cards(:ace, :jack)
+      expect(hand).not_to be_bust
+    end
+
+    it "returns false if score is < 21" do
+      hand = new_hand_with_cards(:jack, :queen)
+      expect(hand).not_to be_bust
+    end
   end
 
   describe "#score" do

@@ -20,13 +20,14 @@ module Blackjack
     end
 
     def <=>(other)
+      value <=> other.value
+    end
+
+    def value
       case rank
-      when Integer
-        rank <=> other.rank
-      when :ace
-        1
-      when :jack, :queen, :king
-        10 <=> other.rank
+      when Integer then rank
+      when :ace then 11
+      when :jack, :queen, :king then 10
       end
     end
   end

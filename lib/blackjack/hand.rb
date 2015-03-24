@@ -5,7 +5,7 @@ module Blackjack
     end
 
     def bust?
-      true
+      score > 21
     end
 
     def score
