@@ -18,5 +18,16 @@ module Blackjack
       object_id == other.object_id ||
         other.class == self.class && [rank, suit] == [other.rank, other.suit]
     end
+
+    def <=>(other)
+      case rank
+      when Integer
+        rank <=> other.rank
+      when :ace
+        1
+      when :jack, :queen, :king
+        10 <=> other.rank
+      end
+    end
   end
 end

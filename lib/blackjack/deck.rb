@@ -11,7 +11,7 @@ module Blackjack
     end
 
     def count
-      cards.count
+      cards.size
     end
 
     def pick
@@ -20,6 +20,10 @@ module Blackjack
 
     def shuffle
       cards.shuffle!
+    end
+
+    def cut
+      cards.rotate(rand(cards.size))
     end
   end
 end
