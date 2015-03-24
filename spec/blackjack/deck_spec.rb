@@ -1,9 +1,21 @@
 require "spec_helper"
 
 describe Blackjack::Deck do
-  specify "a standard deck has 52 cards" do
-    deck = described_class.standard
-    expect(deck.count).to eq(52)
+  describe ".standard" do
+    it "has 52 cards" do
+      deck = described_class.standard
+      expect(deck.count).to eq(52)
+    end
+
+    it "has the ace of spades" do
+      deck = described_class.standard
+      expect(deck.cards).to include(Blackjack::Card.new(:ace, :spades))
+    end
+
+    it "has the queen of hearts" do
+      deck = described_class.standard
+      expect(deck.cards).to include(Blackjack::Card.new(:queen, :hearts))
+    end
   end
 
   describe "#pick" do

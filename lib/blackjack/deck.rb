@@ -1,8 +1,10 @@
 module Blackjack
   class Deck
     def self.standard
-      StandardDeck.new
+      Deck.new(Card.all)
     end
+
+    attr_reader :cards
 
     def initialize(cards = [])
       @cards = cards
@@ -16,15 +18,8 @@ module Blackjack
       cards.pop
     end
 
-    private
-
-    attr_reader :cards
-
-    class StandardDeck < Deck
-      def count
-        52
-      end
+    def shuffle
+      cards.shuffle!
     end
-
   end
 end
