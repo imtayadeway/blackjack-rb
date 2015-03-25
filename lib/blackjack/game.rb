@@ -14,15 +14,20 @@ module Blackjack
 
       loop do
         puts "dealing the cards..."
-        participants.each { |participant| deal(participant) }
+
+        participants.each do |participant|
+          dealer.deal(participant) { deck.deal }
+        end
 
         loop do
           puts dealer.status
           puts player.status
-          print "hit me: [y/n]: "
+          print "hit, stand or double down? [h/s/d]: "
 
           case gets.chomp
-          when "y" then hit(player)
+          when "h" then dealer.hit(player) { deck.deal }
+          when "s" then stand
+          when "d" then double_down
           end
 
           break if player.bust?
@@ -38,26 +43,6 @@ module Blackjack
 
     def participants
       [player, dealer]
-    end
-
-    def deal(player)
-      2.times { player.pick_up_card(deck.deal) }
-    end
-
-    def hit(player)
-      player.pick_up_card(deck.deal)
-    end
-
-    def stand(player)
-      #
-    end
-
-    def double_down(player)
-      #
-    end
-
-    def split(player)
-      #
     end
   end
 end
