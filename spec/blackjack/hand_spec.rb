@@ -72,7 +72,7 @@ describe Blackjack::Hand do
 
   def new_hand_with_cards(*ranks)
     cards = ranks.map do |rank|
-      Blackjack::Card.new(rank, Blackjack::Card::SUITS.sample)
+      Blackjack::Card.build(rank, Blackjack::Card::SUITS.sample)
     end
 
     described_class.new(cards)

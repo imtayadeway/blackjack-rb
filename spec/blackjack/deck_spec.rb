@@ -9,27 +9,27 @@ describe Blackjack::Deck do
 
     it "has the ace of spades" do
       deck = described_class.standard
-      expect(deck.cards).to include(Blackjack::Card.new(:ace, :spades))
+      expect(deck.cards).to include(Blackjack::Card.build(:ace, :spades))
     end
 
     it "has the queen of hearts" do
       deck = described_class.standard
-      expect(deck.cards).to include(Blackjack::Card.new(:queen, :hearts))
+      expect(deck.cards).to include(Blackjack::Card.build(:queen, :hearts))
     end
   end
 
   describe "#pick" do
     it "returns a card from the top" do
-      bottom_card = instance_double(Blackjack::Card)
-      top_card = instance_double(Blackjack::Card)
+      bottom_card = double("top card")
+      top_card = double("bottom card")
       deck = described_class.new([bottom_card, top_card])
 
       expect(deck.pick).to eq(top_card)
     end
 
     it "decrements the count by 1" do
-      a_card = instance_double(Blackjack::Card)
-      another_card = instance_double(Blackjack::Card)
+      a_card = double("a card")
+      another_card = double("another card")
       deck = described_class.new([a_card, another_card])
       expect { deck.pick }.to change { deck.count }.by(-1)
     end

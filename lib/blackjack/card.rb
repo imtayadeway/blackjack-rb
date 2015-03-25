@@ -1,34 +1,26 @@
 module Blackjack
-  class Card
+  module Card
     RANKS = [:ace, *(2..10), :jack, :queen, :king].freeze
     SUITS = [:clubs, :diamonds, :hearts, :spades].freeze
 
     def self.all
-      RANKS.product(SUITS).map { |rank, suit| new(rank, suit) }
+      RANKS.product(SUITS).map { |rank, suit| build(rank, suit) }
     end
 
-    attr_reader :rank, :suit
-
-    def initialize(rank, suit)
-      @rank = rank
-      @suit = suit
-    end
-
-    def ==(other)
-      object_id == other.object_id ||
-        self.class == other.class && [rank, suit] == [other.rank, other.suit]
-    end
-
-    def <=>(other)
-      value <=> other.value
-    end
-
-    def value
+    def self.build(rank, suit)
       case rank
-      when Integer then rank
-      when :ace then 11
-      when :jack, :queen, :king then 10
+      when Integer
+        Numbered.new(rank, suit)
+      when :ace
+        Ace.new(rank, suit)
+      else
+        Face.new(rank, suit)
       end
     end
   end
 end
+
+require "blackjack/card/base"
+require "blackjack/card/numbered"
+require "blackjack/card/face"
+require "blackjack/card/ace"
