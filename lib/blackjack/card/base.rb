@@ -24,6 +24,10 @@ module Blackjack
       def cumulative_score_for(sum)
         sum + value
       end
+
+      def to_s
+        "the #{ rank } of #{ suit }"
+      end
     end
   end
 end
