@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe Blackjack::Player do
   specify "when she picks up a card she should have one card" do
-    player = described_class.new
+    player = described_class.new("test player")
     card = double('card')
     expect { player.pick_up_card(card) }.to change { player.hand.count }.by(1)
   end
@@ -26,7 +26,7 @@ describe Blackjack::Player do
 
   describe "#score" do
     it "returns 0 with no cards" do
-      player = described_class.new
+      player = described_class.new("test player")
       expect(player.score).to be_zero
     end
 
@@ -81,6 +81,6 @@ describe Blackjack::Player do
       Blackjack::Card.build(rank, Blackjack::Card::SUITS.sample)
     end
 
-    described_class.new(cards)
+    described_class.new("test player", cards)
   end
 end

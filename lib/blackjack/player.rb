@@ -1,8 +1,9 @@
 module Blackjack
   class Player
-    attr_reader :hand
+    attr_reader :name, :hand
 
-    def initialize(hand = [])
+    def initialize(name, hand = [])
+      @name = name
       @hand = hand
     end
 
@@ -16,6 +17,10 @@ module Blackjack
 
     def score
       hand.sort.inject(0) { |sum, card| card.cumulative_score_for(sum) }
+    end
+
+    def status
+      "#{ name } (#{ score }): #{ hand.map(&:to_s).inspect }"
     end
   end
 end

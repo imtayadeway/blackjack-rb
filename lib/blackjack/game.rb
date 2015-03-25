@@ -1,11 +1,11 @@
 module Blackjack
   class Game
-    attr_reader :deck, :dealer, :players
+    attr_reader :deck, :dealer, :player
 
     def initialize
       @deck = Deck.standard
-      @dealer = Dealer.new
-      @players = [Player.new]
+      @dealer = Dealer.new("The Dealer")
+      @player = Player.new("Player 1")
     end
 
     def start
@@ -14,21 +14,18 @@ module Blackjack
 
       loop do
         puts "dealing the cards..."
-        participants.each do |participant|
-          deal(participant)
-        end
+        participants.each { |participant| deal(participant) }
 
-        players.each do |player|
-          loop do
-            puts status_for(player)
-            print "hit me: [y/n]: "
+        loop do
+          puts dealer.status
+          puts player.status
+          print "hit me: [y/n]: "
 
-            case gets.chomp
-            when "y" then hit(player)
-            end
-
-            break if player.bust?
+          case gets.chomp
+          when "y" then hit(player)
           end
+
+          break if player.bust?
         end
 
         participants.each do |player|
@@ -39,13 +36,8 @@ module Blackjack
       end
     end
 
-    def status_for(participant)
-      "#{ participant.class } (#{ participant.score }): " \
-      "#{ participant.hand.map(&:to_s).inspect }"
-    end
-
     def participants
-      players + [dealer]
+      [player, dealer]
     end
 
     def deal(player)
