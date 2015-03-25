@@ -11,6 +11,10 @@ module Blackjack
       score > 21
     end
 
+    def blackjack?
+      score == 21
+    end
+
     def pick_up_card(card)
       hand << card
     end

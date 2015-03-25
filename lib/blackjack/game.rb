@@ -17,18 +17,19 @@ module Blackjack
         end
 
         loop do
-          puts dealer.status
+          puts dealer.obscured_status
           puts player.status
-          print "hit, stand or double down? [h/s/d]: "
+          print "hit or stand? [h/s]: "
 
           case gets.chomp
           when "h" then dealer.hit(player) { deck.deal }
           when "s" then break
-          when "d" then double_down
           end
 
-          break if player.bust?
+          break if player.bust? || player.blackjack?
         end
+
+        dealer.play(deck)
 
         puts outcome
         participants.each { |player| dealer.collect(player, deck) }
@@ -42,7 +43,7 @@ module Blackjack
     def outcome
       "#{ player.name }: (#{ player.score }) | " \
       "#{ dealer.name }: (#{ dealer.score }): " <<
-        if player.bust? || player.score < dealer.score
+        if player.bust? || !dealer.bust? && player.score < dealer.score
           "You lost!"
         else
           "You won!"
