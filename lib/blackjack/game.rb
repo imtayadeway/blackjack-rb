@@ -14,11 +14,19 @@ module Blackjack
 
       loop do
         puts "dealing the cards..."
-        participants.each { |participant| deal(participant) }
+        participants.each do |participant|
+          deal(participant)
+        end
 
         players.each do |player|
           loop do
-            hit(player)
+            puts status_for(player)
+            print "hit me: [y/n]: "
+
+            case gets.chomp
+            when "y" then hit(player)
+            end
+
             break if player.bust?
           end
         end
@@ -29,6 +37,11 @@ module Blackjack
 
         break
       end
+    end
+
+    def status_for(participant)
+      "#{ participant.class } (#{ participant.score }): " \
+      "#{ participant.hand.map(&:to_s).inspect }"
     end
 
     def participants
