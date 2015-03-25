@@ -14,6 +14,10 @@ module Blackjack
       cards.pop
     end
 
+    def add_card(card)
+      cards.unshift(card)
+    end
+
     def shuffle
       cards.shuffle!
     end

@@ -15,6 +15,13 @@ module Blackjack
       hand << card
     end
 
+    def return_cards
+      loop do
+        break if hand.empty?
+        yield hand.shift
+      end
+    end
+
     def score
       hand.sort.inject(0) { |sum, card| card.cumulative_score_for(sum) }
     end

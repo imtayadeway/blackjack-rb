@@ -26,7 +26,7 @@ module Blackjack
 
           case gets.chomp
           when "h" then dealer.hit(player) { deck.deal }
-          when "s" then stand
+          when "s" then break
           when "d" then double_down
           end
 
@@ -34,7 +34,7 @@ module Blackjack
         end
 
         participants.each do |player|
-          dealer.collect(player.hand)
+          dealer.collect(player, deck)
         end
 
         break
