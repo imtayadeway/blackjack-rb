@@ -36,8 +36,6 @@ module Blackjack
         participants.each do |player|
           dealer.collect(player, deck)
         end
-
-        break
       end
     end
 
