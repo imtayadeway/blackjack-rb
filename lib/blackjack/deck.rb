@@ -10,20 +10,12 @@ module Blackjack
       @cards = cards
     end
 
-    def count
-      cards.size
-    end
-
     def pick
       cards.pop
     end
 
     def shuffle
       cards.shuffle!
-    end
-
-    def cut
-      cards.rotate(rand(cards.size))
     end
   end
 end

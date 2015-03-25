@@ -4,7 +4,7 @@ describe Blackjack::Deck do
   describe ".standard" do
     it "has 52 cards" do
       deck = described_class.standard
-      expect(deck.count).to eq(52)
+      expect(deck.cards.size).to eq(52)
     end
 
     it "has the ace of spades" do
@@ -31,7 +31,7 @@ describe Blackjack::Deck do
       a_card = double("a card")
       another_card = double("another card")
       deck = described_class.new([a_card, another_card])
-      expect { deck.pick }.to change { deck.count }.by(-1)
+      expect { deck.pick }.to change { deck.cards.size }.by(-1)
     end
   end
 end

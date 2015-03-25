@@ -19,8 +19,6 @@ module Blackjack
         players.each do |player|
           loop do
             hit(player)
-            puts player.hand.score
-            break if deck.cards.empty?
             break if player.bust?
           end
         end
