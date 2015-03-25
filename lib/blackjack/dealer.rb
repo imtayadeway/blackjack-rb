@@ -2,12 +2,12 @@ module Blackjack
   class Dealer < Player
     include Dealing
 
-    def play(deck)
+    def play
       loop do
         puts status
         sleep(1)
         break if score > 17
-        hit(self) { deck.deal }
+        hit(self)
       end
     end
 

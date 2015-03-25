@@ -1,20 +1,17 @@
 module Blackjack
   class Game
-    attr_reader :deck, :dealer, :player
+    attr_reader :dealer, :player
 
     def initialize
-      @deck = Deck.standard
       @dealer = Dealer.new("The Dealer")
       @player = Player.new("Player 1")
     end
 
     def start
-      deck.shuffle
+      dealer.shuffle
 
       loop do
-        participants.each do |participant|
-          dealer.deal(participant) { deck.deal }
-        end
+        participants.each { |participant| dealer.deal(participant) }
 
         loop do
           puts dealer.obscured_status
@@ -22,17 +19,16 @@ module Blackjack
           print "hit or stand? [h/s]: "
 
           case gets.chomp
-          when "h" then dealer.hit(player) { deck.deal }
+          when "h" then dealer.hit(player)
           when "s" then break
           end
 
           break if player.bust? || player.blackjack?
         end
 
-        dealer.play(deck)
-
+        dealer.play
         puts outcome
-        participants.each { |player| dealer.collect(player, deck) }
+        participants.each { |player| dealer.collect(player) }
       end
     end
 

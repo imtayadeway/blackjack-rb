@@ -1,15 +1,23 @@
 module Blackjack
   module Dealing
-    def deal(player, &block)
-      2.times { hit(player, &block) }
+    def deck
+      @deck ||= Deck.standard
     end
 
-    def hit(player, &block)
-      player.pick_up_card(block.call)
+    def deal(player)
+      2.times { hit(player) }
     end
 
-    def collect(player, deck)
+    def hit(player)
+      player.pick_up_card(deck.deal)
+    end
+
+    def collect(player)
       player.return_cards { |card| deck.add_card(card) }
+    end
+
+    def shuffle
+      deck.shuffle
     end
   end
 end
