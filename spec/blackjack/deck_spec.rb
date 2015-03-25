@@ -18,20 +18,20 @@ describe Blackjack::Deck do
     end
   end
 
-  describe "#pick" do
+  describe "#deal" do
     it "returns a card from the top" do
       bottom_card = double("top card")
       top_card = double("bottom card")
       deck = described_class.new([bottom_card, top_card])
 
-      expect(deck.pick).to eq(top_card)
+      expect(deck.deal).to eq(top_card)
     end
 
     it "decrements the count by 1" do
       a_card = double("a card")
       another_card = double("another card")
       deck = described_class.new([a_card, another_card])
-      expect { deck.pick }.to change { deck.cards.size }.by(-1)
+      expect { deck.deal }.to change { deck.cards.size }.by(-1)
     end
   end
 end

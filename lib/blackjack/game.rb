@@ -36,12 +36,11 @@ module Blackjack
     end
 
     def deal(player)
-      2.times { player.pick_up_card(deck.pick) }
+      2.times { player.pick_up_card(deck.deal) }
     end
 
     def hit(player)
-      card = deck.pick
-      player.pick_up_card(card)
+      player.pick_up_card(deck.deal)
     end
 
     def stand(player)

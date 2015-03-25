@@ -10,7 +10,7 @@ module Blackjack
       @cards = cards
     end
 
-    def pick
+    def deal
       cards.pop
     end
 
