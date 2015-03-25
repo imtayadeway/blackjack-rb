@@ -9,12 +9,9 @@ module Blackjack
     end
 
     def start
-      puts "shufflng the deck..."
       deck.shuffle
 
       loop do
-        puts "dealing the cards..."
-
         participants.each do |participant|
           dealer.deal(participant) { deck.deal }
         end
@@ -33,14 +30,23 @@ module Blackjack
           break if player.bust?
         end
 
-        participants.each do |player|
-          dealer.collect(player, deck)
-        end
+        puts outcome
+        participants.each { |player| dealer.collect(player, deck) }
       end
     end
 
     def participants
       [player, dealer]
+    end
+
+    def outcome
+      "#{ player.name }: (#{ player.score }) | " \
+      "#{ dealer.name }: (#{ dealer.score }): " <<
+        if player.bust? || player.score < dealer.score
+          "You lost!"
+        else
+          "You won!"
+        end
     end
   end
 end
