@@ -2,9 +2,10 @@ module Blackjack
   class Round
     attr_reader :dealer, :player
 
-    def initialize(dealer, player, output = $stdout)
+    def initialize(dealer, player, bet, output = $stdout)
       @dealer = dealer
       @player = player
+      @bet = bet
       @output = output
     end
 
@@ -27,16 +28,24 @@ module Blackjack
       end
 
       output.puts "\n"
-      dealer.play
+      dealer.play { |status| puts status }
+
+      if player_lost?
+        player.chips -= bet
+      else
+        player.chips += bet
+      end
+
       output.puts "\n"
       output.puts outcome
+
       participants.each { |player| dealer.collect(player) }
       output.puts "\n"
     end
 
     private
 
-    attr_reader :output
+    attr_reader :output, :bet
 
     def participants
       [player, dealer]
@@ -48,6 +57,7 @@ module Blackjack
       else
         "You won!"
       end <<
+        "\nYou now have $#{player.chips}" <<
         "\n#{ player.name }: (#{ player.score }) | " \
         "#{ dealer.name }: (#{ dealer.score })"
     end

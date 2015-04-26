@@ -10,7 +10,12 @@ module Blackjack
     def start
       puts "\n~~~***$$$ Blackjack-Ruby $$$***~~~\n\n"
       dealer.shuffle
-      loop { Blackjack::Round.new(dealer, player).start }
+
+      loop do
+        print "Enter bet: "
+        bet = gets.chomp.to_i
+        Blackjack::Round.new(dealer, player, bet).start
+      end
     end
   end
 end

@@ -4,7 +4,7 @@ module Blackjack
 
     def play
       loop do
-        puts status
+        yield status
         sleep(1)
         break if score > 17
         hit(self)

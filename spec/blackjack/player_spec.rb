@@ -7,6 +7,11 @@ describe Blackjack::Player do
     expect { player.pick_up_card(card) }.to change { player.hand.count }.by(1)
   end
 
+  specify "she starts with 500 chips" do
+    player = described_class.new("test player")
+    expect(player.chips).to eq(500)
+  end
+
   describe "#bust?" do
     it "returns true if score > 21" do
       player = new_player_with_hand(:jack, :queen, 2)

@@ -1,10 +1,12 @@
 module Blackjack
   class Player
     attr_reader :name, :hand
+    attr_accessor :chips
 
     def initialize(name, hand = [])
       @name = name
       @hand = hand
+      @chips = 500
     end
 
     def bust?
