@@ -1,6 +1,7 @@
 require "blackjack/deck"
 require "blackjack/card"
 require "blackjack/game"
+require "blackjack/round"
 require "blackjack/player"
 require "blackjack/dealing"
 require "blackjack/dealer"
