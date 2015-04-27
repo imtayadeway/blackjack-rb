@@ -1,15 +1,15 @@
 module Blackjack
   class Outcome
-    attr_reader :round, :dealer, :player
+    attr_reader :dealer, :player, :bet
 
-    def initialize(round, dealer, player)
-      @round = round
+    def initialize(dealer, player, bet)
       @dealer = dealer
       @player = player
+      @bet = bet
     end
 
     def to_s
-      if round.player_won?
+      if player_won?
         "\nYou won!"
       else
         "\nYou lost!"
@@ -17,6 +17,18 @@ module Blackjack
         "\nYou now have $#{player.chips}" <<
         "\n#{ player.name }: (#{ player.score }) | " \
         "#{ dealer.name }: (#{ dealer.score })"
+    end
+
+    def collect_winnings
+      if player_won?
+        player.chips += bet
+      else
+        player.chips -= bet
+      end
+    end
+
+    def player_won?
+      !player.bust? && dealer.bust? || player.score > dealer.score
     end
   end
 end
