@@ -11,13 +11,13 @@ module Blackjack
     def go
       loop do
         print "\nhit or stand? [h/s]: "
-        output.puts player.status
 
         case gets.chomp
         when "h" then dealer.hit(player)
         when "s" then break
         end
 
+        output.puts player.status
         break if player.bust? || player.blackjack?
       end
     end

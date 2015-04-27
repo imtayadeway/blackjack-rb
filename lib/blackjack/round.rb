@@ -11,8 +11,7 @@ module Blackjack
 
     def go
       participants.each { |participant| dealer.deal(participant) }
-      output.puts dealer.obscured_status
-      output.puts player.status
+      output.puts dealer.obscured_status, player.status
 
       Blackjack::PlayerTurn.new(dealer, player, output).go
       output.puts "\n"
