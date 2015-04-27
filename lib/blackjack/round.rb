@@ -19,12 +19,14 @@ module Blackjack
       Blackjack::DealerTurn.new(dealer, output).go
 
       collect_winnings
+      output.puts Blackjack::Outcome.new(self, dealer, player).to_s
 
+      participants.each { |participant| dealer.collect(participant) }
       output.puts "\n"
-      output.puts outcome
+    end
 
-      participants.each { |player| dealer.collect(player) }
-      output.puts "\n"
+    def player_won?
+      !player.bust? && dealer.bust? || player.score > dealer.score
     end
 
     private
@@ -33,21 +35,6 @@ module Blackjack
 
     def participants
       [player, dealer]
-    end
-
-    def outcome
-      if player_won?
-        "You won!"
-      else
-        "You lost!"
-      end <<
-        "\nYou now have $#{player.chips}" <<
-        "\n#{ player.name }: (#{ player.score }) | " \
-        "#{ dealer.name }: (#{ dealer.score })"
-    end
-
-    def player_won?
-      !player.bust? && dealer.bust? || player.score > dealer.score
     end
 
     def collect_winnings
