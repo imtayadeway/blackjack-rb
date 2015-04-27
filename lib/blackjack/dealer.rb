@@ -2,9 +2,9 @@ module Blackjack
   class Dealer < Player
     include Dealing
 
-    def play
+    def play(output = $stdout)
       loop do
-        yield status
+        output.puts status
         sleep(1)
         break if score > 17
         hit(self)
