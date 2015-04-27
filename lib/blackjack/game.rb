@@ -14,7 +14,7 @@ module Blackjack
       loop do
         print "Enter bet: "
         bet = gets.chomp.to_i
-        Blackjack::Round.new(dealer, player, bet).start
+        Blackjack::Round.new(dealer, player, bet).go
       end
     end
   end

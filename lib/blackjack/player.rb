@@ -35,19 +35,5 @@ module Blackjack
     def status
       "#{ name } (#{ score }): #{ hand.map(&:to_s).inspect }"
     end
-
-    def play(dealer, output = $stdout)
-      loop do
-        print "\nhit or stand? [h/s]: "
-        output.puts status
-
-        case gets.chomp
-        when "h" then dealer.hit(self)
-        when "s" then break
-        end
-
-        break if bust? || blackjack?
-      end
-    end
   end
 end

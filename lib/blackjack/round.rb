@@ -9,14 +9,14 @@ module Blackjack
       @output = output
     end
 
-    def start
+    def go
       participants.each { |participant| dealer.deal(participant) }
       output.puts dealer.obscured_status
       output.puts player.status
 
-      player.play(dealer, output)
+      Blackjack::PlayerTurn.new(dealer, player, output).go
       output.puts "\n"
-      dealer.play(output)
+      Blackjack::DealerTurn.new(dealer, output).go
 
       collect_winnings
 
