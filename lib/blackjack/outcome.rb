@@ -28,7 +28,8 @@ module Blackjack
     end
 
     def player_won?
-      !player.bust? && dealer.bust? || player.score > dealer.score
+      return false if player.bust?
+      dealer.bust? || player.score > dealer.score
     end
   end
 end
