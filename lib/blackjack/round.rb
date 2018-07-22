@@ -15,7 +15,7 @@ module Blackjack
 
       Blackjack::PlayerTurn.new(dealer, player, output).go
       output.puts "\n"
-      Blackjack::DealerTurn.new(dealer, output).go
+      Blackjack::DealerTurn.new(dealer, output).go unless player.bust?
 
       outcome = Blackjack::Outcome.new(dealer, player, bet)
       outcome.collect_winnings
